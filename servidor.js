@@ -32,7 +32,10 @@ http.createServer(function (request, response) {
 			  post.n2,
 			  function (res) {
 		  		console.log(res);
-		      	response.writeHead(200, {'Content-Type': 'application/json'});
+		      	response.writeHead(200, {
+		      		'Content-Type': 'application/json',
+		      		'Content-Length': res.length,
+		      	});
 		      	response.write(res + '');
 			  	response.end(); 
 	  		  },
