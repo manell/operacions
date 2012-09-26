@@ -32,12 +32,13 @@ http.createServer(function (request, response) {
 			  post.n2,
 			  function (res) {
 		  		console.log(res);
-		  		console.log(res.length);
+		  		var resSerialized = res + '';
+		  		console.log(resSerialized.length);
 		      	response.writeHead(200, {
 		      		'Content-Type': 'application/json',
-		      		'Content-Length': res.length,
+		      		'Content-Length': resSerialized.length,
 		      	});
-		      	response.write(res + '');
+		      	response.write(resSerialized);
 			  	response.end(); 
 	  		  },
 	  		  function (err){
