@@ -15,12 +15,16 @@ http.createServer(function(request, response) {
  	console.log("Request for " + pathname + " receivedd.");
 	console.log(request.method);
 	var data = '';
-	request.on('data', function(chunk) {
-		console.log('rebre dades  post');
-	  data += chunk;
-	  
-	});
-	console.log('escolto');
+	try {
+		request.on('data', function(chunk) {
+			console.log('rebre dades  post');
+		  data += chunk;
+		  
+		});
+	} catch (e) {
+		console.log(e);
+	}
+	
 	request.on('end', function() {
 	  console.log(data);
 	  var post = JSON.parse(data);
