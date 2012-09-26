@@ -20,6 +20,7 @@ http.createServer(function(request, response) {
 	  data += chunk;
 	  
 	});
+	console.log('escolto');
 	request.on('end', function() {
 	  console.log(data);
 	  var post = JSON.parse(data);
