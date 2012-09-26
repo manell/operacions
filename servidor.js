@@ -28,6 +28,7 @@ http.createServer(function(request, response) {
 			  post.n1,
 			  post.n2,
 			  function(res) {
+		  		console.log(res);
 		      	response.writeHead(200, {'Content-Type': 'application/json'});
 		      	response.write(res + '');
 			  	response.end(); 
