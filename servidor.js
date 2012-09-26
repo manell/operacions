@@ -12,20 +12,16 @@ var port = process.env.PORT;
 
 http.createServer(function(request, response) {
 	var pathname = url.parse(request.url).pathname;
- 	console.log("Request for " + pathname + " receivedd.");
-	console.log(request.method);
 	var data = '';
-	try {
-		request.on('data', function(chunk) {
-			console.log('rebre dades  post');
-		  data += chunk;
-		  
-		});
-	} catch (e) {
-		console.log(e);
-	}
+ 	console.log("Request for " + pathname + " received.");
+	console.log(request.method);
 	
-	request.on('end', function() {
+	request.on('data', function (chunk) {
+		console.log('rebre dades post');
+		data += chunk; 
+	});
+	
+	request.on('end', function () {
 	  console.log(data);
 	  var post = JSON.parse(data);
 	  console.log('crido router');
