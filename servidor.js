@@ -12,7 +12,7 @@ var port = process.env.PORT;
 
 http.createServer(function(request, response) {
 	var pathname = url.parse(request.url).pathname;
- 	console.log("Request for " + pathname + " received.");
+ 	console.log("Request for " + pathname + " receivedd.");
 	console.log(request.method);
 	var data = '';
 	request.on('data', function(chunk) {
