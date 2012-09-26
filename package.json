@@ -1,8 +1,12 @@
 {
-  "name": "node-example",
+  "name": "servidor",
   "version": "0.0.1",
   "dependencies": {
-    "express": "2.5.x"
+    "express": "2.5.x",
+    "http":  "0.0.0",
+	"url":  "0.7.9",
+	"qs":  "0.5.1"
+	
   },
   "engines": {
     "node": "0.8.x",
