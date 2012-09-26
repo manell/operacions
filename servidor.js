@@ -10,7 +10,7 @@ handle["/resta"] = operacions.resta;
 	
 var port = process.env.PORT;
 
-http.createServer(function(request, response) {
+http.createServer(function (request, response) {
 	var pathname = url.parse(request.url).pathname;
 	var data = '';
  	console.log("Request for " + pathname + " received.");
@@ -30,13 +30,13 @@ http.createServer(function(request, response) {
 			  response,
 			  post.n1,
 			  post.n2,
-			  function(res) {
+			  function (res) {
 		  		console.log(res);
 		      	response.writeHead(200, {'Content-Type': 'application/json'});
 		      	response.write(res + '');
 			  	response.end(); 
 	  		  },
-	  		  function(err){
+	  		  function (err){
 	  			console.log("No request handler found for " + pathname);
 	  			response.writeHead(404, {"Content-Type": "text/plain"});
 	  			response.write("404 Not found");
@@ -44,7 +44,9 @@ http.createServer(function(request, response) {
 	  		  });
 	  
 	});
-	
+	request.on('error', function(e) {
+		  console.log('problem with request: ' + e.message);
+		});
 }).listen(port);
 
 
