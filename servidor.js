@@ -16,12 +16,12 @@ http.createServer(function (request, response) {
  	console.log("Request for " + pathname + " received.");
 	console.log(request.method);
 	
-	request.on('data', function (chunk) {
+	request.addListener('data', function (chunk) {
 		console.log('rebre dades post');
 		data += chunk; 
 	});
 	
-	request.on('end', function () {
+	request.addListener('end', function () {
 	  console.log(data);
 	  var post = JSON.parse(data);
 	  console.log('crido router');
