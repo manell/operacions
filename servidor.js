@@ -2,10 +2,13 @@ var http = require("http"),
 	url = require("url"),
 	qs = require('querystring'),
 	operacions = require("./operacions"),
-	router = require('./router'),
-	handle = {};
-	handle["/suma"] = operacions.suma;
-	handle["/resta"] = operacions.resta;
+	router = require('./router');
+	
+var	handle = {};
+handle["/suma"] = operacions.suma;
+handle["/resta"] = operacions.resta;
+	
+var port = process.env.PORT;
 
 http.createServer(function(request, response) {
 	var pathname = url.parse(request.url).pathname;
@@ -38,7 +41,7 @@ http.createServer(function(request, response) {
 	  
 	});
 	
-}).listen(8888);
+}).listen(port);
 
 
 
