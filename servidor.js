@@ -32,6 +32,7 @@ http.createServer(function (request, response) {
 			  post.n2,
 			  function (res) {
 		  		console.log(res);
+		  		console.log(res.length);
 		      	response.writeHead(200, {
 		      		'Content-Type': 'application/json',
 		      		'Content-Length': res.length,
