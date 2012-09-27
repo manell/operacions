@@ -1,10 +1,18 @@
-function suma(op1, op2) {
-	return op1 + op2;
+var server = require('./servidor');
+var com = require('./com');
+
+function suma (op1, op2, response) {
+	response (op1 + op2);
 }
 
-function resta(op1, op2) {
-	return op1 - op2;
+function resta(op1, op2, response) {
+	response (op1 - op2);
 }
 
-exports.suma = suma;
-exports.resta = resta;
+
+var	handle = {};
+handle["/suma"] = suma;
+handle["/resta"] = resta;	
+com.wrongResposne('1' );
+server.initServer (handle, com);
+

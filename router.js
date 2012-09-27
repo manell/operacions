@@ -1,13 +1,9 @@
-function route(handle, pathname, response, op1, op2, res, err) { 
-	console.log('èntro router');
+function route(handle, pathname, op1, op2, res, err) { 
 	if (typeof handle[pathname] === 'function') {
-		console.log('retorno res');
- 		res( handle[pathname](op1, op2) );
+		handle[pathname](op1, op2, function response(result){
+			res(result);
+		});
 	} 
-	else {
-		console.log('error router');
-		err();
-	}
- 
+	else err();
 }
 exports.route = route;

@@ -1,59 +1,48 @@
-var http = require("http"),
-	url = require("url"),
-	qs = require('querystring'),
-	operacions = require("./operacions"),
-	router = require('./router');
-	
-var	handle = {};
-handle["/suma"] = operacions.suma;
-handle["/resta"] = operacions.resta;
-	
-var port = process.env.PORT;
 
-http.createServer(function (request, response) {
-	var pathname = url.parse(request.url).pathname;
-	var data = '';
- 	console.log("Request for " + pathname + " received.");
-	console.log(request.method);
+var http = require("http");
+var	url = require("url");
+var	qs = require('querystring');
+var	operacions = require("./operacions");
+var	router = require('./router');
+
 	
-	request.addListener('data', function (chunk) {
-		console.log('rebre dades post');
-		data += chunk; 
-	});
-	
-	request.addListener('end', function () {
-	  console.log(data);
-	  var post = JSON.parse(data);
-	  console.log('crido router');
-	  router.route(handle,
-			  pathname,
-			  response,
-			  post.n1,
-			  post.n2,
-			  function (res) {
-		  		console.log(res);
-		  		var resSerialized = res + '';
-		  		console.log(resSerialized.length);
-		      	response.writeHead(200, {
-		      		'Content-Type': 'application/json',
-		      		'Content-Length': resSerialized.length,
-		      	});
-		      	response.write(resSerialized);
-			  	response.end(); 
-	  		  },
-	  		  function (err){
-	  			console.log("No request handler found for " + pathname);
-	  			response.writeHead(404, {"Content-Type": "text/plain"});
-	  			response.write("404 Not found");
-	  			response.end();
-	  		  });
-	  
-	});
-	request.on('error', function(e) {
-		  console.log('problem with request: ' + e.message);
+
+var port = process.env.PORT || 8888;
+
+function initServer (handle, com) {
+ 	http.createServer (function (request, response) {
+		var pathname = url.parse(request.url).pathname;
+		var data = '';
+		console.log("Request for " + pathname + " received.");
+		console.log(request.method);
+		
+		request.addListener('data', function (chunk) {
+			data += chunk; 
 		});
-}).listen(port);
+		
+		request.addListener('end', function () {
+		var post = JSON.parse(data);
+		router.route(handle,
+			pathname,
+			post.n1,
+			post.n2,
+			function (res) {
+				com.okResponse (response, res);
+			},
+			function ( ) {
+				com.wrongResponse (response);
+			});
+		  
+		});
+		request.on('error', function (e) {
+			console.log('problem with request: ' + e.message);
+		});
+		
+	}).listen (port);
 
+}
+
+exports.initServer = initServer;
 
 
  
