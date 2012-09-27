@@ -21,20 +21,19 @@ function initServer (handle, com) {
 		});
 		
 		request.addListener('end', function () {
-		var post = JSON.parse(data);
+		var args = JSON.parse(data);
 		router.route(handle,
 			pathname,
-			post.n1,
-			post.n2,
+			args,
 			function (res) {
-				com.okResponse (response, res);
+				com.oKResponse (response, res);
 			},
 			function ( ) {
 				com.wrongResponse (response);
 			});
 		  
 		});
-		request.on('error', function (e) {
+		request.addListener('error', function (e) {
 			console.log('problem with request: ' + e.message);
 		});
 		
