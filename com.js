@@ -7,7 +7,7 @@ function oKResponse (response, result) {
 		'Content-Length': resSerialized.length,
 		}
 	);
-	response.write(resSerialized);
+	response.write (resSerialized);
 	response.end(); 
 }
 

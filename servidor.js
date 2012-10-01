@@ -22,6 +22,7 @@ function initServer (handle, com) {
 		
 		request.addListener('end', function () {
 		var args = JSON.parse(data);
+		console.log('problem with request: ' + data);
 		router.route(handle,
 			pathname,
 			args,
